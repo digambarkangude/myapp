@@ -16,13 +16,12 @@ mongoose.connect(config.database, { promiseLibrary: require('bluebird') })
 var api = require('./routes/api');
 var app = express();
 app.use(passport.initialize());
-
+app.use('/api', api);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist/myapp/')));
-app.use('/', express.static(path.join(__dirname, 'dist/myapp/')));
-app.use('/api', api);
+app.use('/login', express.static(path.join(__dirname, 'dist/myapp/')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
